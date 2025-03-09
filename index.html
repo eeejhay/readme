@@ -8,7 +8,7 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f8c8dc;
+            background-color: #ffebf0;
             padding: 50px;
         }
         .container {
@@ -19,7 +19,7 @@
             display: inline-block;
         }
         h1 {
-            color: #d147a3;
+            color: #d63384;
         }
         .btn {
             padding: 10px 20px;
@@ -28,23 +28,42 @@
             border: none;
             cursor: pointer;
             border-radius: 5px;
-        }
-        .next {
             background-color: #ff66b2;
             color: white;
+        }
+        .no {
+            background-color: #66545e;
+            color: white;
+            position: absolute;
         }
     </style>
 </head>
 <body>
     <div class="container" id="survey">
         <h1>Quick Survey!</h1>
-        <p>Do you prefer coffee or tea?</p>
-        <button class="btn next" onclick="showInvitation()">Next</button>
+        <p>What's your name?</p>
+        <input type="text" id="nameInput" class="btn" placeholder="Enter your name">
+        <p>What is your favorite color?</p>
+        <input type="text" id="colorInput" class="btn" placeholder="Enter color">
+        <p>Do you prefer cats or dogs?</p>
+        <select id="petPreference" class="btn">
+            <option value="Cats">Cats</option>
+            <option value="Dogs">Dogs</option>
+            <option value="Both">Both</option>
+        </select>
+        <p>What’s your ideal weekend activity?</p>
+        <input type="text" id="activityInput" class="btn" placeholder="Enter activity">
+        <button class="btn" onclick="showInvitation()">Next</button>
     </div>
 
-    <div class="container" id="invitation" style="display: none;">
-        <h1>Surprise! ☕ Would you like to go on a coffee date next week? 😊</h1>
-        <p>Pick a day:</p>
+    <div class="container" id="invitation" style="display: none; background-color: #ffd1dc;">
+        <h1>HAHAHA Surprise! ☕ Do you want to have a coffee date with me? 😊</h1>
+        <button class="btn" onclick="chooseDate()">Yes</button>
+        <button class="btn no" id="noBtn" onmouseover="moveNo()">No</button>
+    </div>
+
+    <div class="container" id="dateSelection" style="display: none; background-color: #ffd1dc;">
+        <h1>Pick a day for our coffee date!</h1>
         <select id="dateOptions" class="btn">
             <option value="Monday">Monday</option>
             <option value="Tuesday">Tuesday</option>
@@ -53,7 +72,11 @@
             <option value="Friday">Friday</option>
             <option value="Saturday">Saturday</option>
         </select>
-        <button class="btn next" onclick="confirmDate()">Confirm</button>
+        <button class="btn" onclick="finalMessage()">Confirm</button>
+    </div>
+
+    <div class="container" id="finalMessage" style="display: none; background-color: #ffd1dc;">
+        <h1>See you soon, bebe! ❤️</h1>
     </div>
 
     <script>
@@ -62,9 +85,22 @@
             document.getElementById("invitation").style.display = "block";
         }
 
-        function confirmDate() {
-            var selectedDate = document.getElementById("dateOptions").value;
-            alert("Yay! Looking forward to our coffee date on " + selectedDate + "! ❤️");
+        function chooseDate() {
+            document.getElementById("invitation").style.display = "none";
+            document.getElementById("dateSelection").style.display = "block";
+        }
+
+        function finalMessage() {
+            document.getElementById("dateSelection").style.display = "none";
+            document.getElementById("finalMessage").style.display = "block";
+        }
+
+        function moveNo() {
+            var button = document.getElementById("noBtn");
+            var x = Math.random() * (window.innerWidth - 100);
+            var y = Math.random() * (window.innerHeight - 50);
+            button.style.left = x + "px";
+            button.style.top = y + "px";
         }
     </script>
 </body>
