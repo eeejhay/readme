@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Date Invitation</title>
+    <title>Quick Survey</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f6e0b5;
+            background-color: #f8c8dc;
             padding: 50px;
         }
         .container {
@@ -19,7 +19,7 @@
             display: inline-block;
         }
         h1 {
-            color: #aa6f73;
+            color: #d147a3;
         }
         .btn {
             padding: 10px 20px;
@@ -29,35 +29,42 @@
             cursor: pointer;
             border-radius: 5px;
         }
-        .yes {
-            background-color: #eea990;
+        .next {
+            background-color: #ff66b2;
             color: white;
-        }
-        .no {
-            background-color: #66545e;
-            color: white;
-            position: absolute;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Hey! Wanna go on a date next week? 😊</h1>
-        <button class="btn yes" onclick="confirmYes()">Yes</button>
-        <button class="btn no" id="noBtn" onmouseover="moveNo()">No</button>
+    <div class="container" id="survey">
+        <h1>Quick Survey!</h1>
+        <p>Do you prefer coffee or tea?</p>
+        <button class="btn next" onclick="showInvitation()">Next</button>
+    </div>
+
+    <div class="container" id="invitation" style="display: none;">
+        <h1>Surprise! ☕ Would you like to go on a coffee date next week? 😊</h1>
+        <p>Pick a day:</p>
+        <select id="dateOptions" class="btn">
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+        </select>
+        <button class="btn next" onclick="confirmDate()">Confirm</button>
     </div>
 
     <script>
-        function confirmYes() {
-            alert("Yay! Can't wait for our date! ❤️");
+        function showInvitation() {
+            document.getElementById("survey").style.display = "none";
+            document.getElementById("invitation").style.display = "block";
         }
 
-        function moveNo() {
-            var button = document.getElementById("noBtn");
-            var x = Math.random() * (window.innerWidth - 100);
-            var y = Math.random() * (window.innerHeight - 50);
-            button.style.left = x + "px";
-            button.style.top = y + "px";
+        function confirmDate() {
+            var selectedDate = document.getElementById("dateOptions").value;
+            alert("Yay! Looking forward to our coffee date on " + selectedDate + "! ❤️");
         }
     </script>
 </body>
